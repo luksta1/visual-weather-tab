@@ -1,0 +1,34 @@
+{
+  "name": "Visual Weather Tab",
+  "version": "2.1",
+  "manifest_version": 2,
+  "description": "A minimaly visual new tab weather app .",
+  "icons": {
+    "128": "/style/img/umbrella.png"
+  },
+  "start_url": "./index.html",
+  "background": {
+    "scripts": [
+      "bundle.js"
+    ]
+  },
+  "permissions": [
+    "http://*.google.com/",
+    "https://*.google.com/",
+    "geolocation",
+    "http://localhost/*",
+    "https://maps.googleapis.com/*"
+  ],
+  "browser_action": {
+    "default_title": "Visual Weather Tab",
+    "default_icon": "/style/img/umbrella.png",
+    "default_popup": "index.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com https://maps.gstatic.com; object-src 'self'",
+  "web_accessible_resources": [
+    "script.js"
+  ]
+}
