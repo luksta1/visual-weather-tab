@@ -1,39 +1,25 @@
 /* eslint-disable */
-const path = require('path');
-const webpack = require('webpack')
+const webpack = require('webpack');
 module.exports = {
   entry: [
-    path.resolve('./src/index.js')
+    './src/index.js'
   ],
   output: {
-    path: path.resolve('./build/'),
-    filename: 'app.js',
-    publicPath: '.'
+    path: __dirname,
+    publicPath: '/',
+    filename: 'bundle.js'
   },
   module: {
-    loaders: [
-      {
-        test: /\.jsx/,
-        include: path.resolve('./src/components/'),
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.s?css$/,
-        use: [
-          { loader: 'style-loader' },
-          {
-            loader: 'css-loader?importLoaders=1',
-            query: {
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
-            }
-          },
-        ]
+    loaders: [{
+      exclude: /node_modules/,
+      loader: 'babel',
+      query: {
+        presets: ['react', 'es2015', 'stage-1']
       }
-    ]
+    }]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.scss', '.css']
+    extensions: ['', '.js', '.jsx']
   },
   devServer: {
     historyApiFallback: true,
