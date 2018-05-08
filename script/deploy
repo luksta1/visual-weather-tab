@@ -37,7 +37,7 @@ git checkout -b deploy
 webpack -p
 
 # "force" add the otherwise gitignored build files
-git add -f /bundle.js /bundle.js.map
+git add -f bundle.js bundle.js.map
 
 # create a commit, even if nothing changed
 git commit --allow-empty -m 'Deploying'
