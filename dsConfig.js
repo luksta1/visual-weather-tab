@@ -6,8 +6,8 @@
 var config = {
   rootUrl: 'https://api.darksky.net/forecast',
   API_KEY: '32e50fc34cd127c8f19e14267bc0309b',
-  port: 8080,
-  geocodeUrl: 'http://maps.googleapis.com/maps/api/geocode/json?',
+  port: 1337,
+  geocodeUrl: 'http://maps.googleapis.com/maps/api/geocode/json?AIzaSyCQbcx7vwxFHdk0mA2MsKD6ISN5Qb_jT_E&',
 }
 
 module.exports = config;

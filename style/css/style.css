@@ -138,6 +138,10 @@ div.fiveday-wrapper {
     padding: 3em 2em;
 }
 
+div.todays-forecast {
+    margin-bottom: 4em;
+}
+
 div.fiveday-single {
     margin: 0 1em;
 }
@@ -155,10 +159,35 @@ div.top {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding: 2em 2em;
+    padding: 2em 2em 1em 2em;
 }
 
 .top .time h3 {
+    color: #fff;
+}
+
+div.bottom {
+    text-align: center;
+    color: #fff;
+    opacity: 0.5;
+    transition: opacity 0.5s;
+    display: flex;
+}
+
+div.bottom:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.bottom h6 {
+    margin: 0.2em
+}
+
+.bottom a {
+    color: #fff;
+}
+
+.bottom a:hover {
     color: #fff;
 }
 
@@ -190,25 +219,25 @@ div.loading {
 
 @keyframes scale {
     0% {
-        -webkit-transform: scale(1);
+        -webkit-transform: scale(.38);
     }
     50% {
-        -webkit-transform: scale(1.5);
+        -webkit-transform: scale(.5);
     }
     100% {
-        -webkit-transform: scale(1);
+        -webkit-transform: scale(.38);
     }
 }
 
 @-webkit-keyframes scale {
     0% {
-        -webkit-transform: scale(1);
+        -webkit-transform: scale(.38);
     }
     50% {
-        -webkit-transform: scale(1.5);
+        -webkit-transform: scale(.5);
     }
     100% {
-        -webkit-transform: scale(1);
+        -webkit-transform: scale(.38);
     }
 }
 
@@ -224,6 +253,21 @@ div.loading {
 #city-search:focus {
     opacity: 1;
     cursor: pointer;
+}
+
+.article {
+    position: absolute;
+    transition: opacity .5s ease-in;
+}
+
+.article+.article {
+    opacity: 0;
+}
+
+.article-wrapper {
+    position: relative;
+    width: 55vh;
+    margin: 0 auto;
 }
 
 div.forecast-list-item:hover {

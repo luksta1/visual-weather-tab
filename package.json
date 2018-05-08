@@ -7,7 +7,8 @@
   "scripts": {
     "start:dev": "webpack -w & nodemon server.js",
     "start": "node server",
-    "build": "webpack"
+    "build": "webpack",
+    "deploy": "script/deploy"
   },
   "engines": {
     "node": ">= 4.0.0"
@@ -29,6 +30,7 @@
     "eslint-plugin-react": "^6.10.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "jsdom": "^8.1.0",
+    "json-loader": "^0.5.7",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^15.4.2",
     "redux-devtools-extension": "^2.13.2",
@@ -50,6 +52,7 @@
     "gulp-rm": "^1.0.4",
     "lodash": "^3.10.1",
     "moment": "^2.17.1",
+    "news-headline": "0.0.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-granim": "^1.1.0",

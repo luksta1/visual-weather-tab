@@ -1,12 +1,12 @@
 /* eslint-disable */
-var express = require('express');
-var axios = require('axios');
-var _ = require('lodash');
-var bodyParser = require('body-parser');
-var dsConfig = require('./dsConfig');
+let express = require('express');
+let axios = require('axios');
+let _ = require('lodash');
+let bodyParser = require('body-parser');
+let dsConfig = require('./dsConfig');
 
-var app = express();
-var server = require('http').createServer(app);
+let app = express();
+let server = require('http').createServer(app);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -31,9 +31,9 @@ app.get('/api', function (req, res) {
 
 //This endpoint fetches data from the Dark Sky API.
 app.get('/api/forecast', function (req, res) {
-  var lat = req.query.latitude;
-  var long = req.query.longitude;
-  var requestUrl = dsConfig.rootUrl + '/' + dsConfig.API_KEY + '/' + lat + ',' + long;
+  let lat = req.query.latitude;
+  let long = req.query.longitude;
+  let requestUrl = dsConfig.rootUrl + '/' + dsConfig.API_KEY + '/' + lat + ',' + long;
 
   axios.get(requestUrl)
     .then(function (data) {
@@ -47,16 +47,17 @@ app.get('/api/forecast', function (req, res) {
 
 //This endpoint is used to get the city, country based on the lat, long.
 app.get('/api/location', function (req, res) {
-  var lat = req.query.latitude;
-  var long = req.query.longitude;
+  let lat = req.query.latitude;
+  let long = req.query.longitude;
 
-  var requestUrl = dsConfig.geocodeUrl + 'latlng=' + lat + ',' + long;
+  let requestUrl = dsConfig.geocodeUrl + 'latlng=' + lat + ',' + long;
 
   axios.get(requestUrl)
     .then(function (data) {
-      var results = data.data.results[0].address_components;
-      var city = '';
-      var country = '';
+      console.log(data.data)
+      let results = data.data.results[0].address_components;
+      let city = '';
+      let country = '';
       results.forEach(function (item) {
         //check if the types property exists
         if (item['types']) {
@@ -74,8 +75,10 @@ app.get('/api/location', function (req, res) {
     });
 });
 
-const PORT = process.env.PORT || 1337;
+const PORT = process.env.PORT || 8080;
 
 server.listen(PORT, function () {
   console.log(`Serving up the goods on port ${PORT}`);
 });
+
+

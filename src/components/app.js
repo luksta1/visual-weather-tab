@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Icon, Input } from 'semantic-ui-react';
-
-import { getForecast, getLocation, getTemp } from '../reducers2'
-
+import { getForecast, getLocation, getTemp, getNews } from '../reducers2'
 import TodaysForecast from './todays-forecast';
 import FiveDayForecast from './5day-forecast';
+import Articles from './articles';
 
 
 class App extends Component {
@@ -17,11 +16,20 @@ class App extends Component {
 			background: null
 		};
 		this.updateLocation = this.updateLocation.bind(this)
+		this.handleGeolocationError = this.handleGeolocationSuccess.bind(this)
+		this.handleGeolocationSuccess = this.handleGeolocationError.bind(this)
+		this.getNews = this.getNews.bind(this);
+
 	}
 
 	componentWillMount() {
-		const url = window.location.href;
-		url.indexOf('?' + 'location' + '=') === -1 ? this.getLocation() : null;
+		this.getLocation();
+		this.getNews();
+	}
+
+
+	getNews() {
+		this.props.getNews()
 	}
 
 	getLocation() {
@@ -52,23 +60,21 @@ class App extends Component {
 				alert("Something got wrong " + status);
 			}
 		});
-		this.setState({
-			background: null
-		})
 		const form = document.getElementById("search-form");
 		form.reset();
 	}
 
 	// Callback to handle success
-	handleGeolocationSuccess = (position) => {
+	handleGeolocationSuccess(position) {
 		const { coords } = position;
-		this.props.getForecast(coords);
 		this.props.getLocation(coords);
+		this.props.getForecast(coords);
 		this.props.getTemp(coords);
+
 	}
 
 	// Callback to handle error
-	handleGeolocationError = (error) => {
+	handleGeolocationError(error) {
 		if (error.code === 1) {
 			this.setState({ error: 'Please enable permissions to access location and reload the page' });
 		} else if (error.code === 2 && error.message.match(/^Network location provider at 'https:\/\/www.googleapis.com\/' : Returned error code 403.$/)) {
@@ -116,11 +122,11 @@ class App extends Component {
 		} else if (this.props.forecast.length === 0 || !this.props.location) {
 			return (
 				<div className="loading">
-					Loading
-        </div>
+					<img src="/style/img/umbrella.png" />
+				</div>
 			);
 		}
-		// console.log(this.props.forecast)
+		console.log(this.props)
 		// if (!this.state.background) {
 		// 	this.checkTemp();
 		// }
@@ -150,7 +156,7 @@ class App extends Component {
 					{this.render5DayForecast()}
 				</div>
 				<div className="bottom">
-					<h5></h5>
+					<Articles articles={this.props.news.articles} />
 				</div>
 			</div>
 
@@ -177,12 +183,14 @@ function mapStateToProps(state) {
 			'thunderstorm': "wi wi-thunderstorm",
 			'tornado': "wi wi-tornado",
 		},
-		temp: state.temp
+		temp: state.temp,
+		news: state.news
 	};
 }
 
 export default connect(mapStateToProps, {
 	getForecast,
 	getLocation,
-	getTemp
+	getTemp,
+	getNews
 })(App);
